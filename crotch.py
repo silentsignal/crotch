@@ -14,7 +14,9 @@ class Crotch:
         self.handlers = {}
         self.startState = None
         self.tokens=lexer.get_tokens(open(filename,"r").read())
+        self.filename=filename
         self.currentState=None
+        self.currentLine=0
         self.recording=False
         self.trace=[]
         self.endStates=set()
@@ -28,6 +30,9 @@ class Crotch:
     def set_start(self, name):
         self.startState = name.upper()
 
+    def report(self):
+        print "%s (%d) : %s" % (self.filename,self.currentLine,''.join(self.trace))
+
     def run(self):
         try:
             handler = self.handlers[self.startState]
@@ -37,13 +42,17 @@ class Crotch:
 
         oldState=None
         for ttype,tvalue in self.tokens:
+            if "\n" in tvalue:
+                self.currentLine=self.currentLine+1
+
             newState = handler(ttype,tvalue).upper()
+
             if self.currentState!=newState:
                 self.recording=True
             if self.recording:
                 self.trace.append(tvalue)
             if self.currentState in self.endStates:
-                print ''.join(self.trace)
+                self.report()
             if newState==self.startState:
                 self.recording=False
                 self.trace=[]

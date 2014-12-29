@@ -1,4 +1,3 @@
-from pygments.token import *
 import sys
 
 # Based on: http://www.python-course.eu/finite_state_machine.php

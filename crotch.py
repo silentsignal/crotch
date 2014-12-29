@@ -1,4 +1,5 @@
 import sys
+import pygments
 
 # Based on: http://www.python-course.eu/finite_state_machine.php
 class Crotch:
@@ -8,6 +9,8 @@ class Crotch:
         @param string filename  Name of the file to be parsed
         @param Lexer lexer      Pygments Lexer object with all required filters applied
         """
+        if not isinstance(lexer, pygments.lexer.Lexer):
+            raise Exception("Not a lexer!")
         self.handlers = {}
         self.startState = None
         self.tokens=lexer.get_tokens(open(filename,"r").read())

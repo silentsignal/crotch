@@ -1,3 +1,9 @@
+"""
+This example looks for format string vulnerability patterns.
+
+Usage: python example_formatstring.py example_src/example_formatstring.c
+"""
+
 from pygments.lexers import CLexer
 from pygments.token import *
 from crotch import Crotch

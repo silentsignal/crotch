@@ -31,7 +31,7 @@ class Crotch:
         self.startState = name.upper()
 
     def report(self):
-        print "%s (%d) : %s" % (self.filename,self.currentLine,''.join(self.trace))
+        print "%s (%d) : %s" % (self.filename,self.currentLine,''.join(self.trace).strip())
 
     def run(self):
         try:

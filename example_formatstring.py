@@ -9,10 +9,10 @@ from pygments.token import *
 from crotch import Crotch
 import sys
 
-def start(ttype,tvalue):
-    if ttype is Token.Name and tvalue=="printf":
-        return "printf_nopunct"
-    return "start"
+def start(ttype,tvalue): # Callable state declaration
+    if ttype is Token.Name and tvalue=="printf": 
+        return "printf_nopunct" # Name of the next state returned
+    return "start" # Name of the next state returned
 
 def printf_nopunct(ttype,tvalue):
     if ttype is Token.Punctuation and tvalue=="(":

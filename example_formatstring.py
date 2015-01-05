@@ -23,8 +23,13 @@ def in_printf(ttype,tvalue):
     if ttype is Token.String:
         return "start"
     if ttype is Token.Name:
-        return "end"
+        return "wait_end"
     return "in_printf"
+
+def wait_end(ttype,tvalue):
+    if ttype is Token.Punctuation and tvalue==";":
+        return "end"
+    return "wait_end"
 
 def end(ttype,tvalue):
     return "start"
@@ -37,5 +42,6 @@ c.add_state("start",start)
 c.set_start("start")
 c.add_state("printf_nopunct",printf_nopunct)
 c.add_state("in_printf",in_printf)
+c.add_state("wait_end",wait_end)
 c.add_state("end",end,True)
 c.run()

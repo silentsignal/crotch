@@ -37,11 +37,11 @@ def end(ttype,tvalue):
 lexer=CLexer()
 # Add your lexer filters here...
 
-c=Crotch(sys.argv[1],lexer)
+c=Crotch(sys.argv[1],lexer) # We provide the filename and a Lexer
 c.add_state("start",start)
-c.set_start("start")
+c.set_start("start") # Set the start state
 c.add_state("printf_nopunct",printf_nopunct)
 c.add_state("in_printf",in_printf)
 c.add_state("wait_end",wait_end)
-c.add_state("end",end,True)
+c.add_state("end",end,True) # The third argument states that this is an end state, where the code trace should be reported.
 c.run()
